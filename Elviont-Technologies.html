@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elviont Technologies</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f8fafc'/%3E%3Cpath d='M17 43V16h31v7H25v4h20v6H25v4h23v6H17Z' fill='%23101719'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --paper: #f8fafc;
+        --ink: #101719;
+        --muted: #667276;
+        --line: rgba(16, 23, 25, 0.14);
+        --panel: rgba(255, 255, 255, 0.72);
+        --panel-strong: rgba(255, 255, 255, 0.92);
+        --cyan: #00a7b5;
+        --green: #39b36e;
+        --red: #df4f45;
+        --violet: #6c63ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      html {
+        background: var(--paper);
+      }
+
+      body {
+        position: relative;
+        overflow: hidden;
+        overscroll-behavior: none;
+        background:
+          linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(245, 248, 250, 0.86)),
+          var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        content: "";
+        background-image:
+          linear-gradient(rgba(16, 23, 25, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 23, 25, 0.05) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(180deg, transparent, black 16%, black 82%, transparent);
+        animation: grid-slide 18s linear infinite;
+      }
+
+      body::after {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.7), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.72)),
+          linear-gradient(180deg, rgba(248, 250, 252, 0.08), rgba(248, 250, 252, 0.88));
+      }
+
+      #motion-field {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      main {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        overflow: hidden;
+      }
+
+      .stage {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: clamp(1.5rem, 5vw, 4rem) 1.25rem;
+      }
+
+      .brand {
+        display: grid;
+        width: min(1040px, calc(100vw - 2.5rem));
+        justify-items: center;
+        gap: 1.05rem;
+        text-align: center;
+        transform: translateY(-2.3rem);
+      }
+
+      .eyebrow {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: text-up 0.7s cubic-bezier(0.2, 1, 0.2, 1) forwards 0.12s;
+      }
+
+      .eyebrow::before,
+      .eyebrow::after {
+        width: 3rem;
+        height: 1px;
+        content: "";
+        background: var(--line);
+      }
+
+      h1 {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding-bottom: 0.12em;
+        font-size: 8rem;
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: 0;
+        overflow: visible;
+        text-wrap: balance;
+        opacity: 0;
+        transform: translateY(26px);
+        animation: brand-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.22s;
+      }
+
+      .word {
+        display: block;
+        line-height: 1.04;
+        overflow: visible;
+      }
+
+      .word:first-child {
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(16, 23, 25, 0.92);
+        text-shadow: 0 24px 54px rgba(16, 23, 25, 0.1);
+      }
+
+      .word:last-child {
+        color: var(--ink);
+        padding: 0 0.04em 0.3em;
+        margin: 0 -0.04em 0;
+        line-height: 1.2;
+        background: linear-gradient(90deg, var(--ink), #415052 36%, var(--cyan) 62%, var(--violet));
+        background-size: 180% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: title-flow 8s ease-in-out infinite;
+      }
+
+      .tagline {
+        max-width: 610px;
+        margin: -1rem 0 0;
+        color: rgba(16, 23, 25, 0.66);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: text-up 0.7s cubic-bezier(0.2, 1, 0.2, 1) forwards 0.46s;
+      }
+
+      .signal-strip {
+        position: absolute;
+        right: max(1.25rem, 5vw);
+        bottom: max(1.25rem, 4vw);
+        z-index: 3;
+        display: grid;
+        width: 190px;
+        gap: 0.45rem;
+        opacity: 0;
+        transition:
+          bottom 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+          width 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.35s ease;
+        animation: text-up 0.8s ease forwards 0.8s;
+      }
+
+      .signal-strip span {
+        display: block;
+        height: 4px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(16, 23, 25, 0.08);
+      }
+
+      .signal-strip span::after {
+        display: block;
+        width: 46%;
+        height: 100%;
+        content: "";
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--cyan), var(--green), var(--red));
+        animation: signal-load 1.65s ease-in-out infinite;
+      }
+
+      .signal-strip span:nth-child(2)::after {
+        animation-delay: -0.45s;
+      }
+
+      .signal-strip span:nth-child(3)::after {
+        animation-delay: -0.9s;
+      }
+
+      .apps-panel {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: grid;
+        align-items: end;
+        justify-items: center;
+        padding: 0 1.25rem clamp(0.85rem, 2.2vh, 1.35rem);
+        pointer-events: none;
+        transform: translateY(115%);
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .apps-panel.is-visible {
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      body.apps-open .signal-strip {
+        bottom: clamp(10.5rem, 24vh, 13rem);
+        width: 150px;
+        opacity: 1;
+      }
+
+      .apps {
+        display: grid;
+        width: min(1080px, calc(100vw - 2.5rem));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.9rem;
+      }
+
+      .app {
+        --accent: var(--cyan);
+        position: relative;
+        min-height: 142px;
+        overflow: hidden;
+        padding: 1rem;
+        border: 1px solid rgba(16, 23, 25, 0.13);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, var(--panel-strong), var(--panel)),
+          rgba(255, 255, 255, 0.86);
+        box-shadow: 0 22px 54px rgba(35, 44, 48, 0.16);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        transform: translateY(4.4rem);
+        transition:
+          opacity 0.75s cubic-bezier(0.2, 1, 0.2, 1),
+          transform 0.85s cubic-bezier(0.2, 1, 0.2, 1),
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .app:nth-child(2) {
+        --accent: var(--green);
+      }
+
+      .app:nth-child(3) {
+        --accent: var(--red);
+      }
+
+      .apps-panel.is-visible .app {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .apps-panel.is-visible .app:nth-child(1) {
+        transition-delay: 0.06s;
+      }
+
+      .apps-panel.is-visible .app:nth-child(2) {
+        transition-delay: 0.18s;
+      }
+
+      .apps-panel.is-visible .app:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+
+      .app::before {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 5px;
+        content: "";
+        background: var(--accent);
+        transform: scaleY(0.24);
+        transform-origin: bottom;
+        transition: transform 0.45s ease;
+      }
+
+      .app::after {
+        position: absolute;
+        inset: auto 1rem 1rem auto;
+        width: 4.6rem;
+        height: 1px;
+        content: "";
+        background: linear-gradient(90deg, transparent, var(--accent));
+        transform: translateX(0);
+        animation: card-line 2.2s ease-in-out infinite;
+      }
+
+      .app:hover,
+      .app:focus-within {
+        border-color: color-mix(in srgb, var(--accent), transparent 44%);
+        box-shadow: 0 26px 70px rgba(35, 44, 48, 0.2);
+        transform: translateY(-0.35rem);
+        transition-delay: 0s;
+      }
+
+      .app:hover::before,
+      .app:focus-within::before {
+        transform: scaleY(1);
+      }
+
+      .app-number {
+        position: relative;
+        display: inline-grid;
+        min-width: 2.2rem;
+        height: 2.2rem;
+        place-items: center;
+        border: 1px solid color-mix(in srgb, var(--accent), transparent 44%);
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .app h2 {
+        position: relative;
+        margin: 0.85rem 0 0.35rem;
+        color: var(--ink);
+        font-size: 1.4rem;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .app p {
+        position: relative;
+        max-width: 28ch;
+        margin: 0;
+        color: rgba(16, 23, 25, 0.62);
+        font-size: 0.88rem;
+        line-height: 1.48;
+      }
+
+      @keyframes brand-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes text-up {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes title-flow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes grid-slide {
+        to {
+          background-position: 44px 44px;
+        }
+      }
+
+      @keyframes signal-load {
+        0%,
+        100% {
+          transform: translateX(-45%);
+        }
+
+        50% {
+          transform: translateX(145%);
+        }
+      }
+
+      @keyframes card-line {
+        0%,
+        100% {
+          opacity: 0.45;
+          transform: translateX(-0.25rem);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translateX(0.35rem);
+        }
+      }
+
+      @media (max-width: 820px) {
+        .stage {
+          align-items: start;
+          padding-top: 3rem;
+        }
+
+        .brand {
+          gap: 0.8rem;
+          transform: translateY(0);
+        }
+
+        h1 {
+          max-width: 8.5ch;
+          font-size: 3.45rem;
+        }
+
+        .word:first-child {
+          -webkit-text-stroke-width: 1.2px;
+        }
+
+        .tagline {
+          max-width: 340px;
+          margin-top: -0.45rem;
+          font-size: 0.95rem;
+          line-height: 1.55;
+        }
+
+        .signal-strip {
+          right: 1.25rem;
+          bottom: 1rem;
+          width: 138px;
+        }
+
+        body.apps-open .signal-strip {
+          bottom: clamp(25rem, 58vh, 33rem);
+          width: 112px;
+        }
+
+        .apps-panel {
+          padding-bottom: 1rem;
+        }
+
+        .apps {
+          width: min(520px, calc(100vw - 2.5rem));
+          grid-template-columns: 1fr;
+          gap: 0.72rem;
+        }
+
+        .app {
+          min-height: 136px;
+          padding: 0.9rem;
+        }
+
+        .app h2 {
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (min-width: 821px) and (max-width: 1120px) {
+        h1 {
+          font-size: 6.4rem;
+        }
+      }
+
+      @media (max-height: 720px) and (min-width: 821px) {
+        .brand {
+          transform: translateY(-3.1rem);
+        }
+
+        h1 {
+          font-size: 7rem;
+        }
+
+        .app {
+          min-height: 128px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="motion-field" aria-hidden="true"></canvas>
+
+    <main>
+      <section class="stage" aria-label="Elviont Technologies">
+        <div class="brand">
+          <p class="eyebrow">Software Studio</p>
+          <h1>
+            <span class="word">Elviont</span>
+            <span class="word">Technologies</span>
+          </h1>
+          <p class="tagline">
+            Building precise, elegant software products for the next generation of digital
+            companies.
+          </p>
+        </div>
+        <div class="signal-strip" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+
+      <section
+        class="apps-panel"
+        data-apps-panel
+        aria-label="Applications developed by Elviont Technologies"
+        aria-hidden="true"
+      >
+        <div class="apps" data-reveal-apps>
+          <article class="app">
+            <span class="app-number">01</span>
+            <h2>BetIntel</h2>
+            <p>Flagship product experience for modern teams and customers.</p>
+          </article>
+          <article class="app">
+            <span class="app-number">02</span>
+            <h2>Unitpilot</h2>
+            <p>Clean, fast, and dependable software built around daily workflows.</p>
+          </article>
+          <article class="app">
+            <span class="app-number">03</span>
+            <h2>alealens</h2>
+            <p>A polished application designed to scale with your next idea.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const canvas = document.getElementById("motion-field");
+      const ctx = canvas.getContext("2d");
+      const pointer = { x: 0, y: 0, active: false };
+      const ribbons = [];
+      const palette = [
+        "0, 167, 181",
+        "57, 179, 110",
+        "223, 79, 69",
+        "108, 99, 255",
+      ];
+      let width = 0;
+      let height = 0;
+      let scale = 1;
+
+      function resize() {
+        scale = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * scale);
+        canvas.height = Math.floor(height * scale);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+        ribbons.length = 0;
+        const count = Math.max(7, Math.min(12, Math.floor(width / 160)));
+
+        for (let i = 0; i < count; i += 1) {
+          ribbons.push({
+            color: palette[i % palette.length],
+            offset: Math.random() * width,
+            amplitude: 34 + Math.random() * 70,
+            speed: 0.00018 + Math.random() * 0.00022,
+            y: height * (0.18 + Math.random() * 0.58),
+            width: 1 + Math.random() * 2.5,
+            phase: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+
+      function drawRibbon(ribbon, time, index) {
+        const influenceX = pointer.active ? (pointer.x - width / 2) * 0.025 : 0;
+        const influenceY = pointer.active ? (pointer.y - height / 2) * 0.018 : 0;
+        const phase = time * ribbon.speed + ribbon.phase;
+        const yBase = ribbon.y + Math.sin(phase * 1.7 + index) * 28 + influenceY;
+        const gradient = ctx.createLinearGradient(0, yBase, width, yBase + ribbon.amplitude);
+
+        gradient.addColorStop(0, `rgba(${ribbon.color}, 0)`);
+        gradient.addColorStop(0.25, `rgba(${ribbon.color}, 0.34)`);
+        gradient.addColorStop(0.5, `rgba(${ribbon.color}, 0.08)`);
+        gradient.addColorStop(0.78, `rgba(${ribbon.color}, 0.28)`);
+        gradient.addColorStop(1, `rgba(${ribbon.color}, 0)`);
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = ribbon.width;
+        ctx.beginPath();
+
+        for (let x = -120; x <= width + 120; x += 18) {
+          const drift = Math.sin((x + ribbon.offset + time * 0.035) * 0.008 + phase) * ribbon.amplitude;
+          const fine = Math.cos((x + time * 0.02) * 0.018 + ribbon.phase) * 10;
+          const y = yBase + drift + fine + influenceX;
+
+          if (x === -120) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+
+        ctx.stroke();
+      }
+
+      function draw(time) {
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = "rgba(248, 250, 252, 0.5)";
+        ctx.fillRect(0, 0, width, height);
+
+        for (let i = 0; i < ribbons.length; i += 1) {
+          drawRibbon(ribbons[i], time, i);
+        }
+
+        ctx.fillStyle = "rgba(16, 23, 25, 0.22)";
+        for (let i = 0; i < 44; i += 1) {
+          const x = (i * 137 + time * 0.018) % (width + 80) - 40;
+          const y = (i * 83 + Math.sin(time * 0.0004 + i) * 34) % (height + 80) - 40;
+          ctx.fillRect(x, y, 1.2, 1.2);
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", resize);
+      window.addEventListener("pointermove", (event) => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        pointer.active = true;
+      });
+      window.addEventListener("pointerleave", () => {
+        pointer.active = false;
+      });
+
+      const appsPanel = document.querySelector("[data-apps-panel]");
+      const appsGrid = document.querySelector("[data-reveal-apps]");
+      let appsVisible = false;
+      let gestureLocked = false;
+      let touchStartY = 0;
+
+      function setAppsVisible(visible) {
+        if (!appsPanel || appsVisible === visible) return;
+
+        appsVisible = visible;
+        document.body.classList.toggle("apps-open", visible);
+        appsPanel.classList.toggle("is-visible", visible);
+        appsPanel.setAttribute("aria-hidden", String(!visible));
+        appsGrid?.classList.toggle("is-visible", visible);
+      }
+
+      function handleRevealGesture(deltaY) {
+        if (gestureLocked || Math.abs(deltaY) < 12) return;
+
+        setAppsVisible(deltaY > 0);
+
+        gestureLocked = true;
+        window.setTimeout(() => {
+          gestureLocked = false;
+        }, 520);
+      }
+
+      window.addEventListener(
+        "wheel",
+        (event) => {
+          event.preventDefault();
+          handleRevealGesture(event.deltaY);
+          window.scrollTo(0, 0);
+        },
+        { passive: false },
+      );
+
+      window.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartY = event.touches[0]?.clientY || 0;
+        },
+        { passive: true },
+      );
+
+      window.addEventListener(
+        "touchmove",
+        (event) => {
+          const currentY = event.touches[0]?.clientY || touchStartY;
+          const deltaY = touchStartY - currentY;
+
+          if (Math.abs(deltaY) > 10) {
+            event.preventDefault();
+            handleRevealGesture(deltaY);
+          }
+        },
+        { passive: false },
+      );
+
+      window.addEventListener("keydown", (event) => {
+        if (["ArrowDown", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          setAppsVisible(true);
+        }
+
+        if (["ArrowUp", "PageUp", "Escape"].includes(event.key)) {
+          event.preventDefault();
+          setAppsVisible(false);
+        }
+      });
+
+      resize();
+      requestAnimationFrame(draw);
+    </script>
+  </body>
+</html>
