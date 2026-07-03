@@ -150,10 +150,58 @@
         animation: brand-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.22s;
       }
 
+      .brand-title {
+        position: relative;
+        isolation: isolate;
+        cursor: default;
+        transform-style: preserve-3d;
+        transition: filter 0.35s ease;
+      }
+
+      .brand-title::before {
+        position: absolute;
+        inset: -0.08em -0.18em -0.02em;
+        z-index: -1;
+        content: "";
+        border-radius: 26px;
+        background:
+          radial-gradient(
+            circle at var(--title-glow-x, 50%) var(--title-glow-y, 50%),
+            rgba(0, 167, 181, 0.28),
+            transparent 42%
+          ),
+          linear-gradient(90deg, rgba(0, 167, 181, 0.12), rgba(108, 99, 255, 0.14));
+        opacity: 0;
+        filter: blur(0.5px);
+        transform: scale(0.96);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease;
+      }
+
+      .brand-title:hover,
+      .brand-title.is-title-hover {
+        filter: saturate(1.08);
+      }
+
+      .brand-title:hover::before,
+      .brand-title.is-title-hover::before {
+        opacity: 1;
+        transform: scale(1);
+        animation: title-aura 1.7s ease-in-out infinite;
+      }
+
       .word {
         display: block;
         line-height: 1.04;
         overflow: visible;
+        transform: translate3d(0, 0, 0);
+        transition:
+          transform 0.28s ease,
+          filter 0.28s ease,
+          text-shadow 0.28s ease,
+          -webkit-text-stroke-color 0.28s ease;
+        will-change: transform;
       }
 
       .word:first-child {
@@ -173,6 +221,22 @@
         background-clip: text;
         color: transparent;
         animation: title-flow 8s ease-in-out infinite;
+      }
+
+      .brand-title:hover .word:first-child,
+      .brand-title.is-title-hover .word:first-child {
+        transform: translate3d(var(--title-front-x, -2px), var(--title-front-y, -1px), 0) scale(1.012);
+        -webkit-text-stroke-color: rgba(0, 167, 181, 0.96);
+        text-shadow:
+          0 18px 38px rgba(0, 167, 181, 0.22),
+          0 0 28px rgba(108, 99, 255, 0.12);
+      }
+
+      .brand-title:hover .word:last-child,
+      .brand-title.is-title-hover .word:last-child {
+        transform: translate3d(var(--title-back-x, 2px), var(--title-back-y, 1px), 0) scale(1.012);
+        filter: drop-shadow(0 16px 28px rgba(0, 167, 181, 0.22));
+        animation: title-flow 2.6s ease-in-out infinite;
       }
 
       .tagline {
@@ -268,7 +332,7 @@
         overflow: hidden;
         padding: 1rem;
         border: 1px solid rgba(16, 23, 25, 0.13);
-        border-radius: 8px;
+        border-radius: 22px;
         background:
           linear-gradient(180deg, var(--panel-strong), var(--panel)),
           rgba(255, 255, 255, 0.86);
@@ -310,9 +374,10 @@
 
       .app::before {
         position: absolute;
-        inset: 0 auto 0 0;
-        width: 5px;
+        inset: 0.82rem auto 0.82rem 0.75rem;
+        width: 4px;
         content: "";
+        border-radius: 999px;
         background: var(--accent);
         transform: scaleY(0.24);
         transform-origin: bottom;
@@ -356,7 +421,7 @@
         width: 3.4rem;
         height: 3.4rem;
         border: 1px solid rgba(16, 23, 25, 0.1);
-        border-radius: 16px;
+        border-radius: 18px;
         background: #fff;
         box-shadow: 0 14px 28px rgba(35, 44, 48, 0.14);
         object-fit: cover;
@@ -418,6 +483,19 @@
         }
       }
 
+      @keyframes title-aura {
+        0%,
+        100% {
+          opacity: 0.82;
+          filter: blur(0.5px);
+        }
+
+        50% {
+          opacity: 1;
+          filter: blur(1.5px);
+        }
+      }
+
       @keyframes grid-slide {
         to {
           background-position: 44px 44px;
@@ -454,26 +532,26 @@
         }
 
         .stage {
-          align-items: start;
+          place-items: center;
           padding:
-            max(1.1rem, calc(env(safe-area-inset-top) + 0.9rem))
+            max(1rem, env(safe-area-inset-top))
             max(0.9rem, env(safe-area-inset-right))
-            max(0.9rem, env(safe-area-inset-bottom))
+            max(1rem, env(safe-area-inset-bottom))
             max(0.9rem, env(safe-area-inset-left));
         }
 
         .brand {
           width: min(100%, 430px);
           gap: 0.62rem;
-          transform: translateY(0);
+          transform: translateY(-0.2rem);
           transition:
             opacity 0.7s ease,
             transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body.apps-open .brand {
-          opacity: 0.28;
-          transform: translateY(-1.25rem) scale(0.93);
+          opacity: 0.24;
+          transform: translateY(-2.15rem) scale(0.91);
         }
 
 
@@ -531,6 +609,7 @@
           column-gap: 0.72rem;
           row-gap: 0.18rem;
           padding: 0.72rem 0.78rem;
+          border-radius: 20px;
         }
 
         .app-head {
@@ -543,7 +622,7 @@
           align-self: center;
           width: 2.55rem;
           height: 2.55rem;
-          border-radius: 13px;
+          border-radius: 15px;
         }
 
         .app-number {
@@ -596,16 +675,18 @@
 
       @media (max-width: 820px) and (max-height: 680px) {
         .stage {
+          place-items: center;
           padding-top: max(0.65rem, env(safe-area-inset-top));
         }
 
         .brand {
           gap: 0.42rem;
+          transform: translateY(-0.15rem);
         }
 
         body.apps-open .brand {
           opacity: 0.18;
-          transform: translateY(-1.8rem) scale(0.86);
+          transform: translateY(-2.35rem) scale(0.84);
         }
 
         h1 {
@@ -692,7 +773,7 @@
       <section class="stage" aria-label="Elviont Technologies">
         <div class="brand">
           <p class="eyebrow">Software Studio</p>
-          <h1>
+          <h1 class="brand-title" data-brand-title>
             <span class="word">Elviont</span>
             <span class="word">Technologies</span>
           </h1>
@@ -866,6 +947,38 @@
       window.addEventListener("pointerleave", () => {
         pointer.active = false;
       });
+
+      const brandTitle = document.querySelector("[data-brand-title]");
+
+      function updateTitleHover(event) {
+        if (!brandTitle) return;
+
+        const rect = brandTitle.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+        const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+        const dx = x - 0.5;
+        const dy = y - 0.5;
+
+        brandTitle.classList.add("is-title-hover");
+        brandTitle.style.setProperty("--title-glow-x", `${x * 100}%`);
+        brandTitle.style.setProperty("--title-glow-y", `${y * 100}%`);
+        brandTitle.style.setProperty("--title-front-x", `${dx * -8}px`);
+        brandTitle.style.setProperty("--title-front-y", `${dy * -5}px`);
+        brandTitle.style.setProperty("--title-back-x", `${dx * 7}px`);
+        brandTitle.style.setProperty("--title-back-y", `${dy * 4}px`);
+      }
+
+      if (brandTitle) {
+        brandTitle.addEventListener("pointerenter", updateTitleHover);
+        brandTitle.addEventListener("pointermove", updateTitleHover);
+        brandTitle.addEventListener("pointerleave", () => {
+          brandTitle.classList.remove("is-title-hover");
+          brandTitle.style.removeProperty("--title-front-x");
+          brandTitle.style.removeProperty("--title-front-y");
+          brandTitle.style.removeProperty("--title-back-x");
+          brandTitle.style.removeProperty("--title-back-y");
+        });
+      }
 
       const appsPanel = document.querySelector("[data-apps-panel]");
       const appsGrid = document.querySelector("[data-reveal-apps]");
