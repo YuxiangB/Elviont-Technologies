@@ -28,8 +28,11 @@
         --coral: #e35d4f;
         --violet: #635bff;
         --shadow: 0 24px 70px rgba(18, 28, 38, 0.12);
-        --shadow-strong: 0 34px 100px rgba(18, 28, 38, 0.16);
-        --radius: 8px;
+        --shadow-strong: 0 38px 110px rgba(18, 28, 38, 0.17);
+        --shadow-soft: 0 18px 58px rgba(18, 28, 38, 0.1);
+        --radius: 24px;
+        --radius-lg: 34px;
+        --radius-xl: 44px;
         --max: 1180px;
       }
 
@@ -346,29 +349,34 @@
         display: grid;
         width: min(var(--max), calc(100% - 2.3rem));
         grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
+        gap: 0.9rem;
         margin: -2.2rem auto 0;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: var(--line);
-        box-shadow: var(--shadow-strong);
-        overflow: hidden;
+        border-radius: var(--radius-lg);
       }
 
       .proof {
         min-height: 9rem;
         padding: 1.25rem;
+        border: 1px solid rgba(16, 20, 24, 0.105);
+        border-radius: var(--radius);
         background:
           linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82)),
           rgba(255, 255, 255, 0.9);
+        box-shadow:
+          var(--shadow-soft),
+          inset 0 1px 0 rgba(255, 255, 255, 0.92);
         transition:
           background 0.28s ease,
+          box-shadow 0.28s ease,
           transform 0.28s ease;
       }
 
       .proof:hover,
       .proof:focus-within {
         background: #fff;
+        box-shadow:
+          0 28px 82px rgba(18, 28, 38, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.94);
         transform: translateY(-0.18rem);
       }
 
@@ -399,7 +407,7 @@
         width: clamp(12rem, 22vw, 18.5rem);
         overflow: hidden;
         border: 10px solid rgba(255, 255, 255, 0.82);
-        border-radius: 42px;
+        border-radius: 52px;
         background: #fff;
         box-shadow:
           0 48px 115px rgba(26, 37, 44, 0.22),
@@ -522,7 +530,7 @@
 
       .work-grid {
         display: grid;
-        gap: 1.2rem;
+        gap: 1.4rem;
       }
 
       .case-card {
@@ -531,16 +539,17 @@
         display: grid;
         min-height: 35rem;
         grid-template-columns: 0.92fr 1.08fr;
-        gap: clamp(1rem, 3vw, 2.5rem);
+        gap: clamp(0.7rem, 2vw, 1.15rem);
         align-items: stretch;
         overflow: hidden;
+        padding: clamp(0.6rem, 1.3vw, 1rem);
         border: 1px solid rgba(16, 20, 24, 0.105);
-        border-radius: var(--radius);
+        border-radius: var(--radius-xl);
         background:
-          linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.84)),
+          linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.88)),
           #fff;
         box-shadow:
-          0 24px 70px rgba(18, 28, 38, 0.09),
+          0 28px 82px rgba(18, 28, 38, 0.11),
           inset 0 1px 0 rgba(255, 255, 255, 0.9);
         transition:
           border-color 0.32s ease,
@@ -558,10 +567,11 @@
 
       .case-card::before {
         position: absolute;
-        inset: 0 auto auto 0;
+        inset: 0.85rem auto auto 0.85rem;
         z-index: 3;
-        width: 100%;
+        width: calc(100% - 1.7rem);
         height: 4px;
+        border-radius: 999px;
         content: "";
         background: linear-gradient(90deg, var(--accent), transparent 72%);
         transform: scaleX(0.28);
@@ -576,8 +586,9 @@
 
       .case-card::after {
         position: absolute;
-        inset: 0;
+        inset: 0.6rem;
         z-index: 1;
+        border-radius: calc(var(--radius-xl) - 10px);
         pointer-events: none;
         content: "";
         background:
@@ -591,7 +602,7 @@
       .case-card:focus-within {
         border-color: color-mix(in srgb, var(--accent), transparent 52%);
         box-shadow:
-          0 34px 98px rgba(18, 28, 38, 0.15),
+          0 42px 120px rgba(18, 28, 38, 0.16),
           inset 0 1px 0 rgba(255, 255, 255, 0.9);
         transform: translateY(-0.32rem);
       }
@@ -607,7 +618,7 @@
         display: grid;
         align-content: space-between;
         min-height: 100%;
-        padding: clamp(1.25rem, 3vw, 2.4rem);
+        padding: clamp(1.25rem, 3vw, 2.35rem);
       }
 
       .case-top {
@@ -625,7 +636,7 @@
         width: 4.6rem;
         height: 4.6rem;
         border: 1px solid rgba(16, 20, 24, 0.1);
-        border-radius: 1.25rem;
+        border-radius: 1.45rem;
         box-shadow:
           0 16px 36px rgba(18, 28, 38, 0.13),
           0 0 0 6px color-mix(in srgb, var(--accent), transparent 92%);
@@ -715,6 +726,8 @@
         z-index: 1;
         min-height: 34rem;
         overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--accent), transparent 78%);
+        border-radius: var(--radius-lg);
         background:
           repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 48px),
           repeating-linear-gradient(0deg, rgba(16, 20, 24, 0.035) 0 1px, transparent 1px 64px),
@@ -740,7 +753,7 @@
         width: min(62%, 22rem);
         overflow: hidden;
         border: 10px solid rgba(255, 255, 255, 0.86);
-        border-radius: 42px;
+        border-radius: 56px;
         background: #fff;
         box-shadow:
           0 38px 92px rgba(18, 28, 38, 0.27),
@@ -779,8 +792,8 @@
       .metric {
         min-width: 12rem;
         border: 1px solid rgba(16, 20, 24, 0.1);
-        border-radius: var(--radius);
-        padding: 0.95rem;
+        border-radius: 22px;
+        padding: 1rem;
         background: rgba(255, 255, 255, 0.9);
         box-shadow:
           0 18px 42px rgba(18, 28, 38, 0.11),
@@ -822,31 +835,35 @@
       .capability-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        border-radius: var(--radius);
-        background: rgba(255, 255, 255, 0.14);
-        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+        gap: 1rem;
+        border-radius: var(--radius-lg);
       }
 
       .capability {
         position: relative;
         min-height: 13rem;
-        padding: 1.25rem;
+        overflow: hidden;
+        padding: 1.35rem;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: var(--radius);
         background:
           linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
           #101418;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
         transition:
+          border-color 0.28s ease,
           background 0.28s ease,
+          box-shadow 0.28s ease,
           transform 0.28s ease;
       }
 
       .capability:hover,
       .capability:focus-within {
+        border-color: color-mix(in srgb, var(--accent), transparent 54%);
         background:
           linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 84%), rgba(255, 255, 255, 0.04)),
           #101418;
+        box-shadow: 0 34px 92px rgba(0, 0, 0, 0.3);
         transform: translateY(-0.18rem);
       }
 
@@ -878,7 +895,7 @@
       .process-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+        gap: 1.1rem;
       }
 
       .step {
@@ -886,8 +903,8 @@
         min-height: 18rem;
         overflow: hidden;
         border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: 1.35rem;
+        border-radius: var(--radius-lg);
+        padding: 1.45rem;
         background:
           linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82)),
           #fff;
@@ -909,9 +926,10 @@
 
       .step::before {
         position: absolute;
-        inset: 0 auto auto 0;
-        width: 100%;
+        inset: 0.9rem auto auto 0.9rem;
+        width: calc(100% - 1.8rem);
         height: 4px;
+        border-radius: 999px;
         content: "";
         background: linear-gradient(90deg, var(--accent), transparent);
       }
@@ -955,7 +973,7 @@
         gap: 1rem;
         align-items: stretch;
         border: 1px solid var(--line);
-        border-radius: var(--radius);
+        border-radius: var(--radius-xl);
         background:
           linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9)),
           #fff;
@@ -982,7 +1000,10 @@
         display: grid;
         align-content: end;
         min-height: 26rem;
+        margin: clamp(0.6rem, 1.2vw, 0.9rem);
         padding: clamp(1.25rem, 3vw, 2.2rem);
+        border: 1px solid rgba(16, 20, 24, 0.08);
+        border-radius: var(--radius-lg);
         background:
           repeating-linear-gradient(112deg, rgba(16, 20, 24, 0.04) 0 1px, transparent 1px 72px),
           linear-gradient(135deg, rgba(0, 167, 181, 0.13), transparent 42%),
@@ -1231,7 +1252,7 @@
         .device {
           width: 13.5rem;
           border-width: 7px;
-          border-radius: 32px;
+          border-radius: 44px;
         }
 
         .device-one {
@@ -1274,6 +1295,8 @@
 
         .case-card {
           min-height: auto;
+          padding: 0.65rem;
+          border-radius: var(--radius-lg);
         }
 
         .case-card:nth-child(even) .case-visual {
@@ -1283,6 +1306,7 @@
         .case-visual {
           min-height: 31rem;
           order: -1;
+          border-radius: calc(var(--radius-lg) - 8px);
         }
 
         .phone-frame,
@@ -1307,6 +1331,7 @@
 
         .metric {
           min-width: 0;
+          border-radius: 20px;
         }
 
         .footer-links {
@@ -1383,7 +1408,7 @@
         .app-heading img {
           width: 3.6rem;
           height: 3.6rem;
-          border-radius: 1rem;
+          border-radius: 1.18rem;
         }
 
         .case-copy {
@@ -1398,6 +1423,7 @@
         .case-card:nth-child(even) .phone-frame {
           width: min(76%, 16.5rem);
           bottom: -20%;
+          border-radius: 46px;
         }
 
         .number-stack {
@@ -1410,6 +1436,7 @@
 
         .capability {
           min-height: 11.5rem;
+          border-radius: var(--radius);
         }
 
         .support-fab {
