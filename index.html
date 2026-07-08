@@ -1191,31 +1191,36 @@
         position: relative;
         overflow: hidden;
         background:
-          linear-gradient(180deg, rgba(245, 247, 250, 0.08), rgba(255, 255, 255, 0.96) 42%, rgba(245, 247, 250, 0.78)),
-          #fff;
+          radial-gradient(circle at 8% 10%, rgba(0, 167, 181, 0.08), transparent 26%),
+          radial-gradient(circle at 92% 18%, rgba(99, 91, 255, 0.07), transparent 30%),
+          linear-gradient(180deg, rgba(245, 247, 250, 0.08), rgba(255, 255, 255, 0.94) 42%, rgba(245, 247, 250, 0.68)),
+          transparent;
       }
 
       .contact-band .section {
-        padding-top: clamp(3.4rem, 6vw, 5.6rem);
-        padding-bottom: clamp(1.5rem, 3vw, 2.6rem);
+        padding-top: clamp(3.6rem, 6.5vw, 6rem);
+        padding-bottom: clamp(2.6rem, 4.8vw, 4.2rem);
       }
 
       .contact-panel {
         position: relative;
         display: grid;
-        max-width: 960px;
+        max-width: var(--max);
         grid-template-columns: 1fr;
-        gap: clamp(1.35rem, 2.8vw, 2.1rem);
+        gap: clamp(1.05rem, 2vw, 1.45rem);
         align-items: start;
         margin: 0 auto;
-        padding: clamp(1.25rem, 3.2vw, 2.8rem);
-        border: 1px solid var(--line);
+        padding: clamp(1rem, 2.1vw, 1.55rem);
+        border: 1px solid rgba(16, 20, 24, 0.105);
         border-radius: var(--radius-xl);
         background:
-          radial-gradient(circle at 9% 0%, rgba(0, 167, 181, 0.13), transparent 32%),
-          radial-gradient(circle at 100% 8%, rgba(99, 91, 255, 0.1), transparent 36%),
+          linear-gradient(90deg, rgba(16, 20, 24, 0.026) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(16, 20, 24, 0.02) 1px, transparent 1px),
+          radial-gradient(circle at 8% 0%, rgba(0, 167, 181, 0.12), transparent 34%),
+          radial-gradient(circle at 100% 4%, rgba(99, 91, 255, 0.1), transparent 36%),
           linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9)),
           #fff;
+        background-size: 72px 72px, 72px 72px, 100% 100%, 100% 100%, 100% 100%;
         box-shadow: var(--shadow-strong);
         overflow: hidden;
       }
@@ -1225,11 +1230,21 @@
         inset: 0;
         pointer-events: none;
         content: "";
-        background:
-          linear-gradient(90deg, rgba(16, 20, 24, 0.024) 1px, transparent 1px),
-          linear-gradient(180deg, rgba(16, 20, 24, 0.018) 1px, transparent 1px);
-        background-size: 70px 70px;
-        opacity: 0.5;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: calc(var(--radius-xl) - 12px);
+        opacity: 0.72;
+      }
+
+      .contact-panel::after {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        height: 1px;
+        border-radius: inherit;
+        content: "";
+        background: linear-gradient(90deg, transparent 4%, rgba(0, 167, 181, 0.72) 18%, rgba(99, 91, 255, 0.45) 48%, transparent 76%);
+        opacity: 0.76;
+        pointer-events: none;
       }
 
       .contact-panel > * {
@@ -1239,23 +1254,40 @@
 
       .contact-copy {
         display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.75rem clamp(1rem, 2.4vw, 2rem);
+        align-items: end;
         align-content: start;
-        padding: 0;
+        padding: clamp(0.7rem, 1.6vw, 1.2rem) clamp(0.75rem, 1.8vw, 1.35rem) 0;
       }
 
       .contact-copy h2 {
-        max-width: 17.5ch;
-        margin-bottom: 0.85rem;
-        font-size: clamp(2.55rem, 4.8vw, 4.45rem);
-        line-height: 0.98;
+        max-width: 16ch;
+        margin: 0;
+        font-size: clamp(2.4rem, 5.25vw, 5.35rem);
+        line-height: 0.94;
       }
 
       .contact-copy p {
-        max-width: 58ch;
-        margin-bottom: 1.25rem;
+        max-width: 56ch;
+        margin: 0;
         color: rgba(16, 20, 24, 0.72);
         font-size: 1.04rem;
-        line-height: 1.7;
+        line-height: 1.62;
+      }
+
+      .contact-copy .kicker,
+      .contact-copy h2,
+      .contact-copy p {
+        grid-column: 1;
+      }
+
+      .contact-copy .hero-actions {
+        grid-column: 2;
+        grid-row: 2 / span 2;
+        align-self: end;
+        justify-content: flex-end;
+        margin-bottom: 0.15rem;
       }
 
       .contact-card {
@@ -1312,32 +1344,73 @@
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         align-content: stretch;
-        gap: 0.85rem;
+        gap: clamp(0.75rem, 1.6vw, 1rem);
+        padding: 0 clamp(0.1rem, 0.8vw, 0.45rem) clamp(0.1rem, 0.8vw, 0.45rem);
       }
 
       .contact-route {
+        position: relative;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 0.8rem;
+        gap: 1rem;
         align-items: stretch;
-        border: 1px solid rgba(16, 20, 24, 0.08);
-        border-radius: 26px;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.86);
+        min-height: 9.2rem;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--route-accent), transparent 78%);
+        border-radius: var(--radius);
+        padding: 1.05rem;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--route-accent), white 91%) 0, transparent 38%),
+          linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.86)),
+          #fff;
         box-shadow:
           0 16px 38px rgba(18, 28, 38, 0.08),
           inset 0 1px 0 rgba(255, 255, 255, 0.92);
+        transition:
+          transform 0.28s ease,
+          border-color 0.28s ease,
+          box-shadow 0.28s ease;
+      }
+
+      .contact-route:nth-child(1) {
+        --route-accent: var(--cyan);
+      }
+
+      .contact-route:nth-child(2) {
+        --route-accent: var(--green);
+      }
+
+      .contact-route:nth-child(3) {
+        --route-accent: var(--coral);
+      }
+
+      .contact-route::before {
+        position: absolute;
+        top: 0;
+        right: 1rem;
+        left: 1rem;
+        height: 2px;
+        border-radius: 999px;
+        content: "";
+        background: linear-gradient(90deg, color-mix(in srgb, var(--route-accent), transparent 8%), transparent);
+      }
+
+      .contact-route:hover,
+      .contact-route:focus-within {
+        border-color: color-mix(in srgb, var(--route-accent), transparent 52%);
+        box-shadow: 0 24px 62px rgba(18, 28, 38, 0.13);
+        transform: translateY(-0.2rem);
       }
 
       .contact-route > span {
         display: inline-grid;
-        width: 2.1rem;
-        height: 2.1rem;
+        width: 2.25rem;
+        height: 2.25rem;
         place-items: center;
-        border: 1px solid rgba(16, 20, 24, 0.08);
+        border: 1px solid color-mix(in srgb, var(--route-accent), transparent 54%);
         border-radius: 999px;
-        background: var(--ink);
-        color: #fff;
+        background: color-mix(in srgb, var(--route-accent), white 91%);
+        color: color-mix(in srgb, var(--route-accent), #101418 24%);
         font-size: 0.76rem;
         font-weight: 950;
       }
@@ -1384,21 +1457,25 @@
         z-index: 1;
         width: 100%;
         margin: 0;
-        border-top: 1px solid rgba(16, 20, 24, 0.08);
-        background: #f5f5f7;
+        border-top: 0;
+        background: transparent;
         color: #6e6e73;
         font-size: 0.74rem;
         font-weight: 600;
         line-height: 1.5;
         text-align: left;
-        padding: 1.05rem 1.1rem 1.18rem;
+        padding: 0 0 1.45rem;
       }
 
       .footer-inner {
-        width: min(980px, 100%);
+        width: min(var(--max), calc(100% - 2.3rem));
         margin: 0 auto;
-        display: grid;
-        gap: 0.42rem;
+        display: flex;
+        gap: 1rem;
+        align-items: start;
+        justify-content: space-between;
+        border-top: 1px solid rgba(16, 20, 24, 0.1);
+        padding-top: 1rem;
       }
 
       .footer p {
@@ -1406,7 +1483,11 @@
       }
 
       .footer-note {
-        max-width: 74ch;
+        max-width: 67ch;
+      }
+
+      .footer-inner p:last-child {
+        white-space: nowrap;
       }
 
       .support-fab {
@@ -1879,6 +1960,11 @@
           border-radius: var(--radius-lg);
         }
 
+        .contact-copy {
+          grid-template-columns: 1fr;
+          padding: 0.3rem 0.15rem 0;
+        }
+
         .contact-copy h2 {
           max-width: none;
           font-size: clamp(2.15rem, 10.2vw, 2.85rem);
@@ -1889,6 +1975,13 @@
           margin-bottom: 1rem;
           font-size: 0.96rem;
           line-height: 1.55;
+        }
+
+        .contact-copy .hero-actions {
+          grid-column: 1;
+          grid-row: auto;
+          justify-content: start;
+          margin-bottom: 0;
         }
 
         .contact-routes {
@@ -1975,11 +2068,17 @@
         }
 
         .footer {
-          padding: 1rem 0 1.15rem;
+          padding: 0 0 1.25rem;
         }
 
         .footer-inner {
           width: min(calc(100% - 1.4rem), var(--max));
+          display: grid;
+          gap: 0.5rem;
+        }
+
+        .footer-inner p:last-child {
+          white-space: normal;
         }
 
         .signal-panel {
