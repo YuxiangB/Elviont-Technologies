@@ -68,14 +68,12 @@
         pointer-events: none;
         content: "";
         background:
-          linear-gradient(90deg, rgba(16, 20, 24, 0.032) 1px, transparent 1px),
-          linear-gradient(180deg, rgba(16, 20, 24, 0.032) 1px, transparent 1px),
-          repeating-linear-gradient(112deg, rgba(0, 167, 181, 0.04) 0 1px, transparent 1px 172px),
-          repeating-linear-gradient(58deg, rgba(227, 93, 79, 0.033) 0 1px, transparent 1px 230px),
-          linear-gradient(126deg, transparent 0 31%, rgba(0, 167, 181, 0.078) 43%, transparent 59%),
-          linear-gradient(74deg, transparent 0 50%, rgba(99, 91, 255, 0.064) 65%, transparent 78%);
-        background-size: 96px 96px, 96px 96px, 430px 430px, 560px 560px, 190% 190%, 180% 180%;
-        opacity: 0.9;
+          linear-gradient(90deg, rgba(16, 20, 24, 0.028) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(16, 20, 24, 0.028) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(245, 247, 250, 0.9)),
+          linear-gradient(90deg, rgba(0, 167, 181, 0.038), transparent 34%, rgba(99, 91, 255, 0.032) 67%, transparent);
+        background-size: 96px 96px, 96px 96px, 100% 100%, 100% 100%;
+        opacity: 0.86;
         animation: field-shift 30s ease-in-out infinite alternate;
       }
 
@@ -239,12 +237,12 @@
         pointer-events: none;
         content: "";
         background:
-          linear-gradient(112deg, transparent 0 54%, rgba(255, 255, 255, 0.58) 54% 56%, transparent 56%),
-          linear-gradient(112deg, transparent 0 66%, rgba(0, 167, 181, 0.14) 66% 66.35%, transparent 66.35%),
-          linear-gradient(112deg, transparent 0 74%, rgba(227, 93, 79, 0.12) 74% 74.28%, transparent 74.28%);
-        background-size: 180% 180%, 160% 160%, 170% 170%;
-        opacity: 0.7;
-        animation: hero-beams 18s ease-in-out infinite alternate;
+          linear-gradient(180deg, rgba(255, 255, 255, 0.64), transparent 58%),
+          linear-gradient(90deg, rgba(0, 167, 181, 0.08), transparent 34%, rgba(99, 91, 255, 0.055) 68%, transparent),
+          linear-gradient(180deg, transparent 0 58%, rgba(16, 20, 24, 0.025) 58% 58.4%, transparent 58.4%);
+        background-size: 100% 100%, 180% 100%, 100% 260px;
+        opacity: 0.62;
+        animation: hero-beams 22s ease-in-out infinite alternate;
       }
 
       .hero::after {
