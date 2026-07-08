@@ -554,7 +554,7 @@
       }
 
       .case-card:nth-child(even) {
-        grid-template-columns: 1.08fr 0.92fr;
+        grid-template-columns: 0.92fr 1.08fr;
       }
 
       .case-card:nth-child(even) .case-visual {
@@ -587,8 +587,8 @@
         pointer-events: none;
         content: "";
         background:
-          repeating-linear-gradient(115deg, transparent 0 58px, rgba(16, 20, 24, 0.028) 58px 59px, transparent 59px 140px),
-          linear-gradient(125deg, transparent 0 46%, color-mix(in srgb, var(--accent), transparent 88%) 64%, transparent 82%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 56%),
+          linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 90%), transparent 42%);
         opacity: 0;
         transition: opacity 0.32s ease;
       }
@@ -727,19 +727,19 @@
         z-index: 1;
         display: grid;
         grid-template-areas: "phone insight";
-        grid-template-columns: minmax(13rem, 1fr) minmax(12rem, 0.82fr);
+        grid-template-columns: minmax(13rem, 0.92fr) minmax(15rem, 1fr);
         gap: clamp(1rem, 2vw, 1.5rem);
-        align-items: end;
+        align-items: center;
         min-height: 34rem;
         overflow: hidden;
         padding: clamp(1rem, 2.4vw, 2rem);
         border: 1px solid color-mix(in srgb, var(--accent), transparent 78%);
         border-radius: var(--radius-lg);
         background:
-          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 48px),
-          repeating-linear-gradient(0deg, rgba(16, 20, 24, 0.035) 0 1px, transparent 1px 64px),
-          linear-gradient(120deg, color-mix(in srgb, var(--accent), white 80%), transparent 58%),
-          linear-gradient(180deg, #fff, color-mix(in srgb, var(--accent), white 88%));
+          linear-gradient(90deg, rgba(16, 20, 24, 0.03) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(16, 20, 24, 0.024) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), color-mix(in srgb, var(--accent), white 94%));
+        background-size: 64px 64px, 64px 64px, 100% 100%;
       }
 
       .case-visual::before {
@@ -753,20 +753,19 @@
 
       .case-visual::after {
         position: absolute;
-        top: 12%;
-        right: 10%;
-        width: 34%;
-        height: 46%;
+        top: clamp(1rem, 2vw, 1.45rem);
+        right: clamp(1rem, 2vw, 1.45rem);
+        bottom: clamp(1rem, 2vw, 1.45rem);
+        width: 4px;
         border-radius: 999px;
         content: "";
-        background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 58%), transparent 68%);
-        filter: blur(18px);
-        opacity: 0.52;
+        background: linear-gradient(180deg, color-mix(in srgb, var(--accent), transparent 18%), transparent 78%);
+        opacity: 0.5;
         pointer-events: none;
       }
 
       .case-card:nth-child(even) .case-visual {
-        grid-template-areas: "insight phone";
+        grid-template-areas: "phone insight";
       }
 
       .phone-frame {
@@ -776,8 +775,8 @@
         grid-area: phone;
         z-index: 2;
         justify-self: center;
-        align-self: end;
-        width: min(100%, 15.8rem);
+        align-self: center;
+        width: min(100%, 15.2rem);
         overflow: hidden;
         border: 10px solid rgba(255, 255, 255, 0.86);
         border-radius: 56px;
@@ -786,7 +785,7 @@
           0 38px 92px rgba(18, 28, 38, 0.27),
           0 0 0 1px rgba(16, 20, 24, 0.05),
           inset 0 0 0 1px rgba(16, 20, 24, 0.08);
-        transform: rotate(4deg);
+        transform: translateY(0);
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
@@ -794,12 +793,12 @@
         right: auto;
         left: auto;
         justify-self: center;
-        transform: rotate(-4deg);
+        transform: translateY(0);
       }
 
       .case-card:hover .phone-frame,
       .case-card:focus-within .phone-frame {
-        transform: rotate(0deg) translateY(-0.5rem);
+        transform: translateY(-0.45rem);
       }
 
       .phone-frame img {
@@ -816,23 +815,26 @@
         z-index: 3;
         display: grid;
         grid-area: insight;
-        width: min(15rem, 100%);
-        gap: 0.82rem;
+        width: min(18.6rem, 100%);
+        gap: 0.78rem;
         justify-self: stretch;
-        align-self: end;
-        padding: 1rem;
+        align-self: center;
+        padding: clamp(1rem, 2vw, 1.35rem);
         border: 1px solid rgba(16, 20, 24, 0.1);
-        border-radius: 30px;
-        background:
-          linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)),
-          color-mix(in srgb, var(--accent), white 90%);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.9);
         box-shadow:
-          0 26px 70px rgba(18, 28, 38, 0.16),
+          0 22px 58px rgba(18, 28, 38, 0.13),
           inset 0 1px 0 rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(18px);
+        backdrop-filter: blur(16px);
       }
 
       .signal-label {
+        width: fit-content;
+        border: 1px solid rgba(16, 20, 24, 0.08);
+        border-radius: 999px;
+        padding: 0.36rem 0.62rem;
+        background: rgba(255, 255, 255, 0.82);
         color: color-mix(in srgb, var(--accent), #101418 24%);
         font-size: 0.68rem;
         font-weight: 900;
@@ -842,34 +844,53 @@
 
       .signal-title {
         display: block;
-        max-width: 10ch;
+        max-width: 15ch;
         color: var(--ink);
-        font-size: clamp(1.35rem, 2.4vw, 2rem);
+        font-size: clamp(1.45rem, 2.5vw, 2.22rem);
         font-weight: 950;
-        line-height: 0.94;
+        line-height: 0.96;
       }
 
       .signal-list {
         display: grid;
-        gap: 0.54rem;
+        counter-reset: signal;
+        gap: 0.62rem;
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
       .signal-list li {
-        display: flex;
-        min-height: 2.5rem;
+        display: grid;
+        min-height: 2.82rem;
+        grid-template-columns: auto minmax(0, 1fr) auto;
         align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
+        counter-increment: signal;
+        gap: 0.64rem;
         border: 1px solid rgba(16, 20, 24, 0.1);
         border-radius: 18px;
-        padding: 0.58rem 0.72rem;
-        background: rgba(255, 255, 255, 0.72);
+        padding: 0.62rem 0.72rem;
+        background: rgba(255, 255, 255, 0.82);
         color: rgba(16, 20, 24, 0.58);
         font-size: 0.78rem;
         font-weight: 780;
+      }
+
+      .signal-list li::before {
+        display: inline-grid;
+        width: 1.72rem;
+        height: 1.72rem;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff;
+        content: counter(signal, decimal-leading-zero);
+        font-size: 0.62rem;
+        font-weight: 950;
+      }
+
+      .signal-list span {
+        min-width: 0;
       }
 
       .signal-list strong {
@@ -1072,8 +1093,8 @@
 
       .contact-panel {
         display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 1rem;
+        grid-template-columns: minmax(0, 0.96fr) minmax(22rem, 1.04fr);
+        gap: 0;
         align-items: stretch;
         border: 1px solid var(--line);
         border-radius: var(--radius-xl);
@@ -1085,11 +1106,16 @@
       }
 
       .contact-copy {
+        display: grid;
+        align-content: center;
         padding: clamp(1.5rem, 4vw, 3.2rem);
       }
 
       .contact-copy h2 {
+        max-width: 10.5ch;
         margin-bottom: 1rem;
+        font-size: clamp(3rem, 6.2vw, 6.2rem);
+        line-height: 0.94;
       }
 
       .contact-copy p {
@@ -1110,10 +1136,11 @@
         border: 1px solid rgba(16, 20, 24, 0.08);
         border-radius: var(--radius-lg);
         background:
-          radial-gradient(circle at 88% 8%, rgba(0, 167, 181, 0.16), transparent 28%),
-          radial-gradient(circle at 12% 90%, rgba(99, 91, 255, 0.12), transparent 30%),
-          linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.74)),
+          linear-gradient(90deg, rgba(16, 20, 24, 0.028) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(16, 20, 24, 0.022) 1px, transparent 1px),
+          linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.78)),
           var(--paper-warm);
+        background-size: 62px 62px, 62px 62px, 100% 100%, 100% 100%;
       }
 
       .contact-card-head {
@@ -1482,7 +1509,7 @@
         }
 
         .case-card:nth-child(even) .case-visual {
-          order: -1;
+          order: 0;
         }
 
         .case-visual {
@@ -1493,7 +1520,7 @@
           min-height: auto;
           gap: 1rem;
           padding: 1rem;
-          order: -1;
+          order: 0;
           border-radius: calc(var(--radius-lg) - 8px);
         }
 
@@ -1503,7 +1530,7 @@
           left: auto;
           width: min(76%, 16rem);
           justify-self: center;
-          transform: rotate(2deg);
+          transform: translateY(0);
         }
 
         .case-card:hover .phone-frame,
@@ -1624,6 +1651,14 @@
 
         .signal-list li {
           min-height: 2.35rem;
+          grid-template-columns: auto minmax(0, 1fr) max-content;
+          gap: 0.5rem;
+          padding: 0.58rem 0.62rem;
+        }
+
+        .signal-list strong {
+          grid-column: auto;
+          justify-self: end;
         }
 
         .capability {
@@ -1655,8 +1690,8 @@
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#work">Work</a>
-        <a href="#process">Process</a>
         <a href="#capabilities">Capabilities</a>
+        <a href="#process">Process</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="header-actions">
