@@ -312,6 +312,36 @@
         letter-spacing: 0;
       }
 
+      .glow-title {
+        --shine-x: 50%;
+        --shine-y: 50%;
+        --title-hot: 0;
+        position: relative;
+        isolation: isolate;
+        cursor: default;
+      }
+
+      .glow-title::after {
+        position: absolute;
+        inset: -0.14em -0.08em;
+        z-index: -1;
+        pointer-events: none;
+        content: "";
+        background:
+          radial-gradient(
+            circle at var(--shine-x) var(--shine-y),
+            rgba(0, 167, 181, 0.13),
+            rgba(27, 116, 255, 0.075) 26%,
+            transparent 52%
+          );
+        filter: blur(16px);
+        opacity: var(--title-hot);
+        transform: scale(calc(1 + var(--title-hot) * 0.018));
+        transition:
+          opacity 0.24s ease,
+          transform 0.24s ease;
+      }
+
       .glow-title .word {
         display: inline-block;
         white-space: nowrap;
@@ -319,16 +349,22 @@
 
       .glow-title .char {
         --hot: 0;
+        --lean: 0;
+        --lift: 0;
         display: inline-block;
-        color: color-mix(in srgb, var(--ink), var(--cyan) calc(var(--hot) * 46%));
+        color: color-mix(in srgb, var(--ink), var(--cyan) calc(var(--hot) * 58%));
         text-shadow:
-          0 0 calc(var(--hot) * 18px) rgba(0, 167, 181, 0.42),
-          0 0 calc(var(--hot) * 42px) rgba(99, 91, 255, 0.2);
-        transform: translateY(calc(var(--hot) * -0.045em));
+          calc(var(--lean) * -5px) calc(var(--lift) * 3px) calc(var(--hot) * 12px) rgba(0, 167, 181, 0.34),
+          0 0 calc(var(--hot) * 32px) rgba(27, 116, 255, 0.16);
+        transform:
+          translate3d(calc(var(--lean) * 0.035em), calc(var(--lift) * -0.08em), 0)
+          scale(calc(1 + var(--hot) * 0.018));
+        transform-origin: 50% 72%;
         transition:
-          color 0.16s ease,
-          text-shadow 0.16s ease,
-          transform 0.16s ease;
+          color 0.13s ease,
+          text-shadow 0.13s ease,
+          transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: color, text-shadow, transform;
       }
 
       .lead {
@@ -2430,16 +2466,38 @@
 
       const glowTitle = document.querySelector(".glow-title");
       const chars = [...document.querySelectorAll(".glow-title .char")];
-      const coolDown = () => chars.forEach((char) => char.style.setProperty("--hot", "0"));
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+      const coolDown = () => {
+        if (glowTitle) {
+          glowTitle.style.setProperty("--title-hot", "0");
+        }
+        chars.forEach((char) => {
+          char.style.setProperty("--hot", "0");
+          char.style.setProperty("--lean", "0");
+          char.style.setProperty("--lift", "0");
+        });
+      };
 
       if (glowTitle) {
         glowTitle.addEventListener("pointermove", (event) => {
+          const titleBox = glowTitle.getBoundingClientRect();
+          glowTitle.style.setProperty("--shine-x", `${event.clientX - titleBox.left}px`);
+          glowTitle.style.setProperty("--shine-y", `${event.clientY - titleBox.top}px`);
+          glowTitle.style.setProperty("--title-hot", "1");
+
           chars.forEach((char) => {
             const box = char.getBoundingClientRect();
-            const center = box.left + box.width / 2;
-            const distance = Math.abs(event.clientX - center);
-            const hot = Math.max(0, 1 - distance / 74);
+            const centerX = box.left + box.width / 2;
+            const centerY = box.top + box.height / 2;
+            const dx = event.clientX - centerX;
+            const dy = event.clientY - centerY;
+            const distance = Math.hypot(dx * 0.85, dy * 1.1);
+            const hot = Math.max(0, 1 - distance / 115);
+            const lift = Math.max(0, 1 - Math.abs(dy) / 110) * hot;
+            const lean = clamp(dx / 90, -1, 1) * hot;
             char.style.setProperty("--hot", hot.toFixed(3));
+            char.style.setProperty("--lean", lean.toFixed(3));
+            char.style.setProperty("--lift", lift.toFixed(3));
           });
         });
         glowTitle.addEventListener("pointerleave", coolDown);
