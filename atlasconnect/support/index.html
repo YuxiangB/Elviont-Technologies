@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#050912">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="Support for Atlas Connect on iPhone, including VPN setup, connection help, invitation access, notifications, and privacy.">
+  <meta property="og:title" content="Atlas Connect Support">
+  <meta property="og:description" content="Help with VPN setup, connection issues, invitation access, locations, and notifications.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elviont.nl/atlasconnect/support/">
+  <title>Atlas Connect Support</title>
+  <link rel="canonical" href="https://elviont.nl/atlasconnect/support/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div class="site-shell">
+    <nav class="site-nav" aria-label="Atlas Connect">
+      <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>Atlas Connect</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="./" aria-current="page">Support</a></li>
+        <li><a href="../privacy/">Privacy</a></li>
+      </ul>
+    </nav>
+
+    <header class="hero">
+      <span class="eyebrow">Support</span>
+      <h1>Secure connection help.</h1>
+      <p class="lede">Find answers for invitation access, first-time VPN setup, connection problems, location information, notifications, and unexpected disconnects.</p>
+    </header>
+
+    <main id="content" class="content">
+      <section class="card card--accent" aria-labelledby="contact">
+        <h2 id="contact">Contact Support</h2>
+        <p>Contact Elviont Technologies through its GitHub profile. Include your iPhone model, iOS version, Atlas Connect version, the time of the issue, and the exact on-screen message.</p>
+        <p><strong>Never send an invitation code, VPN credential, password, private key, or complete tunnel configuration.</strong></p>
+        <a class="button" href="https://github.com/elvionttechnologies">Contact Developer</a>
+      </section>
+
+      <section class="card" aria-labelledby="quick-help">
+        <h2 id="quick-help">Quick Help</h2>
+        <div class="info-grid">
+          <article class="info-item">
+            <h3>Invitation Access</h3>
+            <p>Enter the invitation code exactly as supplied. Most codes can be redeemed once. After successful validation, access remains on that iPhone.</p>
+          </article>
+          <article class="info-item">
+            <h3>First Connection</h3>
+            <p>Tap Connect and approve Apple’s request to add the Atlas Connect VPN configuration. iOS must approve the profile before the tunnel can start.</p>
+          </article>
+          <article class="info-item">
+            <h3>Stuck On Connecting</h3>
+            <p>Use Cancel, confirm Wi-Fi or cellular internet is working, wait a few seconds, and try again. Avoid repeatedly tapping Connect while a request is active.</p>
+          </article>
+          <article class="info-item">
+            <h3>Unexpected Disconnect</h3>
+            <p>Reconnect after the network becomes stable. A Wi-Fi change, airplane mode, device restart, unreachable server, or iOS resource decision can end a tunnel.</p>
+          </article>
+          <article class="info-item">
+            <h3>Location Information</h3>
+            <p>The current city and country are approximate and based on the public IP address. VPNs, mobile carriers, and ISP routing can make the displayed location differ from your physical position.</p>
+          </article>
+          <article class="info-item">
+            <h3>Notifications</h3>
+            <p>If connection alerts do not appear, open iOS Settings, find Atlas Connect under Notifications, and confirm notifications are allowed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="connection-checks">
+        <h2 id="connection-checks">If The VPN Will Not Connect</h2>
+        <ol>
+          <li>Confirm the iPhone can load a webpage without the VPN.</li>
+          <li>Return to Atlas Connect and make sure the previous connection attempt has finished or been cancelled.</li>
+          <li>Check that an Atlas Connect VPN configuration appears in iOS Settings under General › VPN &amp; Device Management › VPN.</li>
+          <li>If iOS reports that the saved profile is invalid, remove only the old Atlas Connect profile and approve creation again from the app.</li>
+          <li>Restart Atlas Connect, then restart the iPhone if the NetworkExtension service remains unresponsive.</li>
+          <li>Install the latest available Atlas Connect version and try again on a stable network.</li>
+        </ol>
+      </section>
+
+      <section class="card" aria-labelledby="status">
+        <h2 id="status">Understanding Connection Status</h2>
+        <div class="info-grid">
+          <article class="info-item">
+            <h3>Connecting</h3>
+            <p>iOS has received the request and is starting the Packet Tunnel. Atlas Connect does not report success during this stage.</p>
+          </article>
+          <article class="info-item">
+            <h3>Connected</h3>
+            <p>The app shows Connected only after iOS confirms that the system VPN tunnel is active.</p>
+          </article>
+          <article class="info-item">
+            <h3>Reconnecting</h3>
+            <p>The tunnel is reasserting after a temporary network interruption. Allow a short period for iOS to restore the route.</p>
+          </article>
+          <article class="info-item">
+            <h3>Disconnected</h3>
+            <p>The system tunnel is no longer active and device traffic has returned to the standard network route.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="report">
+        <h2 id="report">What To Include In A Report</h2>
+        <ul>
+          <li>iPhone model and iOS version.</li>
+          <li>Atlas Connect version shown on the About page.</li>
+          <li>Whether the device was using Wi-Fi or cellular data.</li>
+          <li>The connection status and complete user-facing error message.</li>
+          <li>The approximate time and time zone when the issue occurred.</li>
+          <li>A screenshot with personal information and public IP details removed.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="privacy">
+        <h2 id="privacy">Privacy And Security</h2>
+        <p>VPN credentials are stored in iOS Keychain. Atlas Connect contains no advertising or third-party analytics SDKs. Connection statistics and preferences are stored locally on the device.</p>
+        <p>Read the full policy for details about VPN traffic, invitation validation, approximate-location checks, diagnostics, storage, and data sharing.</p>
+        <div class="text-links">
+          <a href="../privacy/">Read the Privacy Policy</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Elviont Technologies</span>
+      <span>Atlas Connect · Support</span>
+    </footer>
+  </div>
+</body>
+</html>
