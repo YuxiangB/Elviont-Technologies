@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#050912">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="Privacy Policy for Atlas Connect, the private VPN client for iPhone.">
+  <meta property="og:title" content="Atlas Connect Privacy Policy">
+  <meta property="og:description" content="How Atlas Connect handles VPN traffic, credentials, diagnostics, invitation access, and local app data.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elviont.nl/atlasconnect/privacy/">
+  <title>Atlas Connect Privacy Policy</title>
+  <link rel="canonical" href="https://elviont.nl/atlasconnect/privacy/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div class="site-shell">
+    <nav class="site-nav" aria-label="Atlas Connect">
+      <a class="brand" href="../support/">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>Atlas Connect</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../support/">Support</a></li>
+        <li><a href="./" aria-current="page">Privacy</a></li>
+      </ul>
+    </nav>
+
+    <header class="hero">
+      <span class="eyebrow">Privacy</span>
+      <h1>Privacy, explained clearly.</h1>
+      <p class="lede">This policy describes how Atlas Connect handles information when it creates and operates a system-managed VPN on your iPhone.</p>
+      <p class="page-meta">Effective date: July 23, 2026</p>
+    </header>
+
+    <main id="content" class="content">
+      <section class="card card--accent" aria-labelledby="overview">
+        <h2 id="overview">Overview</h2>
+        <p>Atlas Connect routes device traffic through an encrypted Packet Tunnel managed by iOS. The app is designed to collect as little information as practical and does not include advertising or third-party analytics SDKs.</p>
+        <div class="status-row" aria-label="Privacy highlights">
+          <span class="status-pill">No advertising</span>
+          <span class="status-pill">No cross-app tracking</span>
+          <span class="status-pill">Credentials in iOS Keychain</span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="information">
+        <h2 id="information">Information Atlas Connect Uses</h2>
+        <ul>
+          <li><strong>VPN configuration:</strong> the selected server, protocol settings, and the information required for iOS to operate the Packet Tunnel.</li>
+          <li><strong>VPN credentials:</strong> connection credentials are stored in iOS Keychain and made available only to Atlas Connect and its Packet Tunnel extension.</li>
+          <li><strong>Invitation access:</strong> an invitation code and a randomly generated installation identifier are sent over HTTPS for validation. The access service stores hashes rather than the original values.</li>
+          <li><strong>Network information:</strong> public IP, approximate city and country, network interface type, server latency, and availability checks may be processed to show connection and location information.</li>
+          <li><strong>Local app data:</strong> connection history, data-usage totals, app language, appearance, notification preferences, and related settings are stored on the device.</li>
+          <li><strong>Operational diagnostics:</strong> redacted connection stages, status changes, error codes, and stop reasons may be saved locally to help identify failures.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="traffic">
+        <h2 id="traffic">VPN Traffic</h2>
+        <p>When the VPN is connected, device traffic is sent through the selected VPN server so the service can route it to its destination. Network infrastructure necessarily processes connection information such as IP addresses, timing, and destination details needed to transmit traffic and protect the service.</p>
+        <p>Atlas Connect does not use tunnel traffic for advertising or cross-app tracking. Do not use the service for unlawful activity.</p>
+      </section>
+
+      <section class="card" aria-labelledby="storage">
+        <h2 id="storage">Storage And Retention</h2>
+        <div class="info-grid">
+          <article class="info-item">
+            <h3>On Your iPhone</h3>
+            <p>Preferences, usage statistics, and connection history remain in iOS-protected local storage until removed with the app or cleared by an available in-app control.</p>
+          </article>
+          <article class="info-item">
+            <h3>In iOS Keychain</h3>
+            <p>VPN credentials and the invitation-access marker use Keychain protection and are not stored in ordinary preferences or plain-text app files.</p>
+          </article>
+          <article class="info-item">
+            <h3>Invitation Service</h3>
+            <p>Hashed invitation and installation values may be retained as needed to validate access, prevent unauthorized reuse, and protect the service.</p>
+          </article>
+          <article class="info-item">
+            <h3>Temporary Files</h3>
+            <p>Sensitive imported configuration material is moved into Keychain and the temporary plain-text copy is removed after a successful import.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="sharing">
+        <h2 id="sharing">Services And Sharing</h2>
+        <p>Atlas Connect does not sell personal information. Information is shared only as needed to provide the VPN and app functionality, including with the selected VPN infrastructure, invitation validation service, public IP and approximate-location services, Apple system services, or when required by law or necessary to protect users and the service.</p>
+      </section>
+
+      <section class="card" aria-labelledby="choices">
+        <h2 id="choices">Your Choices</h2>
+        <ul>
+          <li>Disconnect the VPN at any time from Atlas Connect or iOS Settings.</li>
+          <li>Manage VPN configurations under iOS Settings.</li>
+          <li>Manage notification permission in iOS Settings.</li>
+          <li>Remove locally stored app data by deleting Atlas Connect from the device.</li>
+          <li>Contact support with a privacy or deletion question.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="security">
+        <h2 id="security">Security</h2>
+        <p>Atlas Connect uses Apple NetworkExtension APIs, iOS Keychain, encrypted HTTPS requests, and encrypted VPN transports. No system can guarantee absolute security, but Atlas Connect is designed to avoid plain-text credential storage and to redact sensitive values from diagnostics.</p>
+      </section>
+
+      <section class="card" aria-labelledby="children">
+        <h2 id="children">Children</h2>
+        <p>Atlas Connect is not directed to children under 13, and we do not knowingly collect personal information from children for advertising or profiling.</p>
+      </section>
+
+      <section class="card" aria-labelledby="changes">
+        <h2 id="changes">Changes To This Policy</h2>
+        <p>This policy may be updated when the app, infrastructure, or legal requirements change. The effective date at the top of this page identifies the latest published version.</p>
+      </section>
+
+      <section class="card card--accent" aria-labelledby="contact">
+        <h2 id="contact">Contact</h2>
+        <p>For privacy questions or support, contact Elviont Technologies through its GitHub profile. Do not include invitation codes, VPN credentials, private keys, or other secrets in a public message.</p>
+        <a class="button" href="https://github.com/elvionttechnologies">Contact Developer</a>
+        <div class="text-links">
+          <a href="../support/">Atlas Connect Support</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Elviont Technologies</span>
+      <span>Atlas Connect · Privacy</span>
+    </footer>
+  </div>
+</body>
+</html>
